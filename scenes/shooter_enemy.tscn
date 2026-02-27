@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6uffglh6ns4l"]
 
 [ext_resource type="Texture2D" uid="uid://cso6cqkweuaeo" path="res://Foozle_2DS0012_Void_FleetPack_1/Foozle_2DS0012_Void_EnemyFleet_1/Kla'ed/Base/PNGs/Kla'ed - Battlecruiser - Base.png" id="1_id4l2"]
-[ext_resource type="Script" uid="uid://612vuqa2u6ew" path="res://Scripts/shooter_enemy.gd" id="1_ve5yo"]
+[ext_resource type="Script" uid="uid://612vuqa2u6ew" path="res://scripts/shooter_enemy.gd" id="1_ve5yo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_id4l2"]
 radius = 27.0
@@ -9,19 +9,19 @@ height = 78.0
 
 [node name="shooter_enemy" type="Area2D" unique_id=259711499]
 scale = Vector2(0.75, 0.75)
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_ve5yo")
+fire_rate = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=11525857]
-position = Vector2(0, 0)
 texture = ExtResource("1_id4l2")
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=695134166]
-position = Vector2(0, 0)
 shape = SubResource("CapsuleShape2D_id4l2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1091912806]
-position = Vector2(0, 0)
 rect = Rect2(-10, -10, 30, 30)
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=478509182]

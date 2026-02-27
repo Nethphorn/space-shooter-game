@@ -1,8 +1,8 @@
-class_name ShooterEnemy extends Area2D
+class_name ShooterEnemy extends Enemy
 
-@export var speed = 150
-@export var hp = 1
-@export var fire_rate = 1.5
+@export var speed_override = 150
+@export var hp_override = 1
+@export var fire_rate = 0.5
 
 signal laser_shot(laser_scene, location)
 
@@ -10,6 +10,11 @@ signal laser_shot(laser_scene, location)
 @onready var bullet_scene = preload("res://scenes/enemy_lazer.tscn")
 
 var shoot_cd := false
+
+func _ready():
+	# Use overrides if they are set, otherwise use inherited values
+	if speed_override != 150: speed = speed_override
+	if hp_override != 1: hp = hp_override
 
 func _physics_process(delta):
 	global_position.y += speed * delta
