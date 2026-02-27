@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dr8t4tm7wcsby"]
+
+[ext_resource type="PackedScene" uid="uid://dw77s75mc35sm" path="res://scenes/enemy.tscn" id="1_nqceo"]
+[ext_resource type="Texture2D" uid="uid://bxmm50hd6x3l2" path="res://Foozle_2DS0012_Void_FleetPack_1/Foozle_2DS0012_Void_EnemyFleet_1/Kla'ed/Base/PNGs/Kla'ed - Frigate - Base.png" id="2_qps2w"]
+
+[node name="Frigate" unique_id=76421291 instance=ExtResource("1_nqceo")]
+speed = 175
+hp = 3
+
+[node name="Sprite2D" parent="." index="0" unique_id=678394141]
+texture = ExtResource("2_qps2w")
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1641329807]
+position = Vector2(0, 0)

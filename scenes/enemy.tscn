@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dw77s75mc35sm"]
+
+[ext_resource type="Texture2D" uid="uid://ctn7frjemtafb" path="res://Foozle_2DS0012_Void_FleetPack_1/Foozle_2DS0012_Void_EnemyFleet_1/Kla'ed/Base/PNGs/Kla'ed - Fighter - Base.png" id="1_7p1mj"]
+[ext_resource type="Script" uid="uid://pfdkdxpjdj74" path="res://scripts/enemy.gd" id="1_md0e3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1mj"]
+size = Vector2(40, 39)
+
+[node name="Enemy" type="Area2D" unique_id=76421291]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_md0e3")
+speed = 300
+hp = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=678394141]
+position = Vector2(0, 0)
+scale = Vector2(2.0624998, 2.0624998)
+texture = ExtResource("1_7p1mj")
+flip_v = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1641329807]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_7p1mj")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=459376717]
+position = Vector2(0, 0)
+rect = Rect2(-10, -10, 24, 24)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

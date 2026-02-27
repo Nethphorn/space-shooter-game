@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ccn2wmlvy88hq"]
+
+[ext_resource type="Script" uid="uid://c4oipb8ap5rii" path="res://scripts/lazer.gd" id="1_14yh8"]
+[ext_resource type="Texture2D" uid="uid://ca26q2tpfoh3x" path="res://Foozle_2DS0011_Void_MainShip/Foozle_2DS0011_Void_MainShip/Main ship weapons/PNGs/Main ship weapon - Projectile - Zapper.png" id="2_y5oxn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lyutw"]
+radius = 2.0
+height = 34.0
+
+[node name="lazer" type="Area2D" unique_id=94346871]
+position = Vector2(241, 268)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_14yh8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1524391076]
+position = Vector2(-9.536743e-07, -44.999996)
+scale = Vector2(0.8388336, 1.0788857)
+texture = ExtResource("2_y5oxn")
+region_enabled = true
+region_rect = Rect2(0, 0, 30.665985, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=90637424]
+position = Vector2(1, -45)
+shape = SubResource("CapsuleShape2D_lyutw")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1801423400]
+position = Vector2(-5, -24)
+rect = Rect2(1, 3, 9, 7)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
