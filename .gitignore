@@ -1,3 +1,28 @@
-# Godot 4+ specific ignores
+# Godot-specific ignores
 .godot/
-/android/
+*.translation
+
+# OS-specific ignores
+.DS_Store
+Thumbs.db
+
+# Desktop/Web Export ignores
+# It's better to keep your exports in a separate folder to keep the repo clean
+export/
+build/
+bin/
+
+# Crash logs and temporal files
+*.log
+*.tmp
+*.swp
+
+# Mono/C# specific (if you ever use it)
+.mono/
+data_*/
+mono_crash.*.json
+
+# VS Code specific
+# You might want to track launch.json, but local settings and workspace files should stay local
+.vscode/*.log
+.vscode/project.xcworkspace
