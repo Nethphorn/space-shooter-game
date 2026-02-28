@@ -6,6 +6,7 @@
 [node name="diver_enemy" unique_id=76421291 instance=ExtResource("1_x15ja")]
 speed = 500
 hp = 1
+points = 150
 
 [node name="Sprite2D" parent="." index="0" unique_id=678394141]
 texture = ExtResource("2_5ovsw")

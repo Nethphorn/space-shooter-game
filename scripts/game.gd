@@ -5,8 +5,10 @@ extends Node2D
 @onready var player_spawn_pos = $PlayerSpawnPos
 @onready var laser_container = $LaserContainer
 @onready var timer = $EnemySpawnTimer
-@onready var enemy_container = $EnemyContainer
 
+@onready var hub = $UIlayer/HUB
+
+var score := 0
 var player = null
 
 func _ready():
@@ -14,6 +16,7 @@ func _ready():
 	assert(player != null)
 	player.global_position = player_spawn_pos.global_position
 	player.laser_shot.connect(_on_player_laser_shot)
+	hub.update_score(score)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
@@ -36,11 +39,18 @@ func _on_enemy_spawn_timer_timeout():
 	var margin = 64
 	var random_x = randf_range(margin, screen_width - margin)
 	
-	enemy_container.add_child(e)
+	add_child(e)
 	e.global_position = Vector2(random_x, screen_rect.position.y - 64) # Spawn above the visible area
+	
+	# Connect scoring signal
+	e.enemy_died.connect(_on_enemy_died)
 	
 	if e.has_signal("laser_shot"):
 		e.laser_shot.connect(_on_enemy_laser_shot)
+
+func _on_enemy_died(points):
+	score += points
+	hub.update_score(score)
 
 func _on_enemy_laser_shot(laser_scene, location):
 	var laser = laser_scene.instantiate()
