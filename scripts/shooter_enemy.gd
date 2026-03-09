@@ -2,6 +2,7 @@ class_name ShooterEnemy extends Enemy
 
 @export var speed_override = 150
 @export var hp_override = 1
+@export var points_override = 150
 @export var fire_rate = 0.5
 
 signal laser_shot(laser_scene, location)
@@ -15,6 +16,8 @@ func _ready():
 	# Use overrides if they are set, otherwise use inherited values
 	if speed_override != 150: speed = speed_override
 	if hp_override != 1: hp = hp_override
+	if points_override != 150: points = points_override
+	else: points = 150
 
 func _physics_process(delta):
 	global_position.y += speed * delta
@@ -30,7 +33,7 @@ func shoot():
 		laser_shot.emit(bullet_scene, muzzle.global_position)
 
 func die():
-	queue_free()
+	super.die()
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()

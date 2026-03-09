@@ -6,12 +6,105 @@
 [ext_resource type="PackedScene" uid="uid://dw77s75mc35sm" path="res://scenes/enemy.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dr8t4tm7wcsby" path="res://scenes/frigate.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://c6uffglh6ns4l" path="res://scenes/shooter_enemy.tscn" id="5_p57ef"]
+[ext_resource type="AudioStream" uid="uid://cgpp23b055mmr" path="res://audio/15 Retro Explosion #2.mp3" id="6_kvuet"]
+[ext_resource type="PackedScene" uid="uid://ig4t0h230327" path="res://scenes/hub.tscn" id="6_u5sy4"]
+[ext_resource type="Script" uid="uid://8x0ggcgt8fa3" path="res://scripts/hub.gd" id="7_gee14"]
+[ext_resource type="AudioStream" uid="uid://dpa18otot3ok" path="res://audio/07 Retro Lazer #7.mp3" id="7_trtic"]
+[ext_resource type="PackedScene" uid="uid://ctmkc8qqrmpp1" path="res://scenes/game_over_screen.tscn" id="8_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://cg6ouhgqwis4i" path="res://Foozle_2DS0015_Void_EnvironmentPack/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Condesed/Starry background  - Layer 01 - Void.png" id="9_vtaks"]
+[ext_resource type="Texture2D" uid="uid://dkxdan0fyl7nd" path="res://Foozle_2DS0015_Void_EnvironmentPack/Foozle_2DS0015_Void_EnvironmentPack/Backgrounds/PNGs/Split up/Starry background  - Layer 03 - Stars.png" id="10_kvpfn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u5sy4"]
+font_size = 48
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kvpfn"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(270, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
 
 [node name="Game" type="Node2D" unique_id=1308168808]
 script = ExtResource("1_uwrxv")
 enemy_scenes = Array[PackedScene]([ExtResource("4_lbhrr"), ExtResource("4_iywne"), ExtResource("4_p57ef"), ExtResource("5_p57ef")])
+music_volume = -15.0
+laser_volume = -15.0
+explode_volume = -10.0
+
+[node name="SFX" type="Node" parent="." unique_id=436314098]
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="SFX" unique_id=13174457]
+stream = ExtResource("7_trtic")
+volume_db = -10.0
+
+[node name="Explode" type="AudioStreamPlayer" parent="SFX" unique_id=1802372905]
+stream = ExtResource("6_kvuet")
+volume_db = -10.0
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="SFX" unique_id=1073824901]
+volume_db = -10.0
+
+[node name="UIlayer" type="CanvasLayer" parent="." unique_id=87796729]
+
+[node name="HUB" parent="UIlayer" unique_id=544030720 instance=ExtResource("6_u5sy4")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_gee14")
+
+[node name="Score" type="Label" parent="UIlayer/HUB" unique_id=400699492]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "SCORE: 9999"
+label_settings = SubResource("LabelSettings_u5sy4")
+horizontal_alignment = 1
+
+[node name="GameOverScreen" parent="UIlayer/HUB" unique_id=507531752 instance=ExtResource("8_0tnpc")]
+visible = false
+layout_mode = 1
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1031142797]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1715049810]
+motion_mirroring = Vector2(0, 960)
+
+[node name="Space" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=220168782]
+texture_repeat = 2
+position = Vector2(269, 480)
+texture = ExtResource("9_vtaks")
+region_enabled = true
+region_rect = Rect2(0, 0, 540, 960)
+
+[node name="Star" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=518150735]
+position = Vector2(160.39037, 454.91864)
+rotation = 1.5707964
+scale = Vector2(1.0887741, 1.4923947)
+texture = ExtResource("10_kvpfn")
+region_enabled = true
+region_rect = Rect2(0, 0, 960, 540)
+
+[node name="StarParticleEffect" type="GPUParticles2D" parent="." unique_id=947882443]
+position = Vector2(270, -50)
+amount = 20
+lifetime = 1.25
+preprocess = 5.0
+process_material = SubResource("ParticleProcessMaterial_kvpfn")
 
 [node name="EnemySpawnTimer" type="Timer" parent="." unique_id=800175558]
+wait_time = 2.0
 autostart = true
 
 [node name="Player" parent="." unique_id=1186691508 instance=ExtResource("2_yqjtg")]
@@ -24,4 +117,5 @@ position = Vector2(258, 883)
 
 [node name="EnemyContainer" type="Node2D" parent="." unique_id=1846992732]
 
+[connection signal="finished" from="SFX/MusicPlayer" to="." method="_on_music_player_finished"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

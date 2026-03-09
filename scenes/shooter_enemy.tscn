@@ -13,6 +13,7 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_ve5yo")
 fire_rate = 2.0
+points_override = 150
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=11525857]
 texture = ExtResource("1_id4l2")
@@ -22,6 +23,7 @@ flip_v = true
 shape = SubResource("CapsuleShape2D_id4l2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1091912806]
+position = Vector2(-2.6666667, -80)
 rect = Rect2(-10, -10, 30, 30)
 
 [node name="Muzzle" type="Marker2D" parent="." unique_id=478509182]

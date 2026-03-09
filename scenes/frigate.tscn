@@ -9,6 +9,7 @@ size = Vector2(64, 80)
 [node name="Frigate" unique_id=76421291 instance=ExtResource("1_nqceo")]
 speed = 175
 hp = 3
+points = 200
 
 [node name="Sprite2D" parent="." index="0" unique_id=678394141]
 texture = ExtResource("2_qps2w")

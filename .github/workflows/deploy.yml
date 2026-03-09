@@ -1,0 +1,40 @@
+name: "Export and Deploy to GitHub Pages"
+
+on:
+  push:
+    branches:
+      - main # Set this to your primary branch name
+
+jobs:
+  export_web:
+    runs-on: ubuntu-latest
+    name: Web Export
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          # This version matches your local setup from .vscode/settings.json
+          version: stable
+          use-dotnet: false
+
+      - name: Export for Web
+        run: |
+          mkdir -v -p build/web
+          # Assumes you have an export preset named "Web" in Godot
+          godot --headless --export-release "Web" build/web/index.html
+
+      - name: Add COOP/COEP Header Fix (for Godot 4)
+        run: |
+          # Download the service worker script
+          curl -L https://raw.githubusercontent.com/gzuidhof/coi-serviceworker/master/coi-serviceworker.min.js -o build/web/coi-serviceworker.min.js
+          # Inject the script tag into index.html
+          sed -i 's/<script/<script src="coi-serviceworker.min.js"><\/script><script/' build/web/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/web
+          branch: gh-pages # The branch the action will deploy to.

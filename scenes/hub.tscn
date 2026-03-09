@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ig4t0h230327"]
+
+[node name="HUB" type="Control" unique_id=544030720]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

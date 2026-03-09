@@ -21,6 +21,7 @@ flip_v = true
 shape = SubResource("RectangleShape2D_7p1mj")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=459376717]
+position = Vector2(-1, -53)
 rect = Rect2(-10, -10, 24, 24)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
