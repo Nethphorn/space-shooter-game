@@ -17,7 +17,7 @@ jobs:
         uses: chickensoft-games/setup-godot@v2
         with:
           # This version matches your local setup from .vscode/settings.json
-          version: stable
+          version: 4.5.1
           use-dotnet: false
 
       - name: Export for Web
