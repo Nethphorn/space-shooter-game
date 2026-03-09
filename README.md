@@ -2,7 +2,7 @@
 
 A fast-paced, action-packed space shooter game built with **Godot 4.5.1**. Survive waves of enemies, dodge incoming fire, and rack up a high score!
 
-## 🕹️ [Play the Game Now!](https://nethphorn.github.io/space-shooter-game/)
+## 🕹️ [Play the Game Now! (Click ME!)](https://nethphorn.github.io/space-shooter-game/)
 
 ---
 
