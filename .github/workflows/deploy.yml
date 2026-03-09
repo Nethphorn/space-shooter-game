@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main # Set this to your primary branch name
+# This grants the workflow permission to write to the gh-pages branch
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   export_web:
